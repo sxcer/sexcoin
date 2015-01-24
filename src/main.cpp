@@ -2139,7 +2139,7 @@ static unsigned int nCurrentBlockFile = 1;
 FILE* AppendBlockFile(unsigned int& nFileRet)
 {
     nFileRet = 0;
-    loop
+    looper
     {
         FILE* file = OpenBlockFile(nCurrentBlockFile, 0, "ab");
         if (!file)
@@ -2230,7 +2230,7 @@ bool LoadBlockIndex(bool fAllowNew)
             uint256 thash;
             char scratchpad[SCRYPT_SCRATCHPAD_SIZE];
 
-            loop
+            looper
             {
                 scrypt_1024_1_1_256_sp(BEGIN(block.nVersion), BEGIN(thash), scratchpad);
                 if (thash <= hashTarget)
@@ -3210,7 +3210,7 @@ bool ProcessMessages(CNode* pfrom)
     //
 
     int magic=0;
-    loop
+    looper
     {
         magic = 0;
         if(fDebug){ printf("---- loop top -----------------\n");}
@@ -3980,14 +3980,14 @@ void static BitcoinMiner(CWallet *pwallet)
         //
         int64 nStart = GetTime();
         uint256 hashTarget = CBigNum().SetCompact(pblock->nBits).getuint256();
-        loop
+        looper
         {
             unsigned int nHashesDone = 0;
             //unsigned int nNonceFound;
 
             uint256 thash;
             char scratchpad[SCRYPT_SCRATCHPAD_SIZE];
-            loop
+            looper
             {
                 scrypt_1024_1_1_256_sp(BEGIN(pblock->nVersion), BEGIN(thash), scratchpad);
 

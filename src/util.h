@@ -14,7 +14,11 @@
 #include <sys/time.h>
 #include <sys/resource.h>
 #else
-typedef int pid_t; /* define for windows compatiblity */
+ //building with msys2 pid_t is already defined 
+ #ifndef _PID_T_
+ #define _PID_T_
+ typedef int pid_t; /* define for windows compatiblity */
+ #endif /* _PID_T_ */
 #endif
 #include <map>
 #include <vector>
@@ -37,7 +41,7 @@ typedef unsigned long long  uint64;
 static const int64 COIN = 100000000;
 static const int64 CENT = 1000000;
 
-#define loop                for (;;)
+#define looper              for (;;)
 #define BEGIN(a)            ((char*)&(a))
 #define END(a)              ((char*)&((&(a))[1]))
 #define UBEGIN(a)           ((unsigned char*)&(a))

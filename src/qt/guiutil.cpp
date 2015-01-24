@@ -12,18 +12,20 @@
 #include <QFont>
 #include <QLineEdit>
 #include <QUrl>
+#include <QUrlQuery>
 #include <QTextDocument> // For Qt::escape
 #include <QAbstractItemView>
 #include <QApplication>
 #include <QClipboard>
 #include <QFileDialog>
 #include <QDesktopServices>
+#include <QStandardPaths>
 #include <QThread>
 #include <QMessageBox>
 #include <QSettings>
-#include <phonon/AudioOutput>
-#include <phonon/MediaObject>
-#include <phonon/Path>
+//#include <phonon/AudioOutput>
+//#include <phonon/MediaObject>
+//#include <phonon/Path>
 
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
@@ -95,7 +97,8 @@ bool parseBitcoinURI(const QUrl &uri, SendCoinsRecipient *out)
     SendCoinsRecipient rv;
     rv.address = uri.path();
     rv.amount = 0;
-    QList<QPair<QString, QString> > items = uri.queryItems();
+	QUrlQuery temp = QUrlQuery(uri);
+    QList<QPair<QString, QString> > items = temp.queryItems();
     for (QList<QPair<QString, QString> >::iterator i = items.begin(); i != items.end(); i++)
     {
         bool fShouldReturnFalse = false;
@@ -148,7 +151,7 @@ bool parseBitcoinURI(QString uri, SendCoinsRecipient *out)
 
 QString HtmlEscape(const QString& str, bool fMultiLine)
 {
-    QString escaped = Qt::escape(str);
+    QString escaped = QString(str).toHtmlEscaped();
     if(fMultiLine)
     {
         escaped = escaped.replace("\n", "<br>\n");
@@ -173,7 +176,7 @@ void copyEntryData(QAbstractItemView *view, int column, int role)
         QApplication::clipboard()->setText(selection.at(0).data(role).toString());
     }
 }
-
+/* Comment out PlaySound()
 void PlaySound(QString soundfile){
 
 
@@ -218,7 +221,7 @@ void PlaySound(QString soundfile,int count){
         PlaySound(soundfile);
     }
 }
-
+*/
 
 QString getSaveFileName(QWidget *parent, const QString &caption,
                                  const QString &dir,
@@ -229,7 +232,7 @@ QString getSaveFileName(QWidget *parent, const QString &caption,
     QString myDir;
     if(dir.isEmpty()) // Default to user documents location
     {
-        myDir = QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation);
+        myDir = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
     }
     else
     {

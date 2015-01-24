@@ -56,13 +56,15 @@
 #include <QDateTime>
 #include <QMovie>
 #include <QFileDialog>
-#include <QDesktopServices>
+//#include <QDesktopServices>
+#include <QStandardPaths>
 #include <QTimer>
 #include <QDragEnterEvent>
 #include <QUrl>
-#include <phonon/AudioOutput>
-#include <phonon/MediaObject>
-#include <phonon/Path>
+#include <QMimeData>
+//#include <phonon/AudioOutput>
+//#include <phonon/MediaObject>
+//#include <phonon/Path>
 
 #include <iostream>
 
@@ -502,8 +504,8 @@ void BitcoinGUI::optionsClicked()
 void BitcoinGUI::aboutClicked()
 {
     //printf("Playing %s\n",clientModel->getOptionsModel()->getSoundAbout().toStdString().c_str());
-    if(clientModel->getOptionsModel()->getUseAbout())
-        GUIUtil::PlaySound(clientModel->getOptionsModel()->getSoundAbout());
+    //if(clientModel->getOptionsModel()->getUseAbout())
+    //    GUIUtil::PlaySound(clientModel->getOptionsModel()->getSoundAbout());
     AboutDialog dlg;
     dlg.setModel(clientModel);
     dlg.exec();
@@ -571,8 +573,8 @@ void BitcoinGUI::setNumBlocks(int count, int nTotalBlocks)
             progressBarLabel->setText(clientModel->getStatusBarWarnings());
             progressBarLabel->setVisible(true);
         }
-        if(progressBar->isVisible())
-            GUIUtil::PlaySound(clientModel->getOptionsModel()->getSoundSync());
+        //if(progressBar->isVisible())
+        //    GUIUtil::PlaySound(clientModel->getOptionsModel()->getSoundSync());
         progressBar->setVisible(false);
         tooltip = tr("Downloaded %1 blocks of transaction history.").arg(count);
     }
@@ -731,18 +733,18 @@ void BitcoinGUI::incomingTransaction(const QModelIndex & parent, int start, int 
                         .data(Qt::DecorationRole));
 
         // TODO: Insert DING here
-        if (amount > 0)
-        {
-            if(clientModel->getOptionsModel()->getUseIncoming()){
-//                int loop=(int)(amount/1000000000)+1;
-//                QString message="Incoming: " + QString::number(loop) + "\n";
-//                QMessageBox::information(0,"Incoming",message,QMessageBox::Ok);
-                GUIUtil::PlaySound(clientModel->getOptionsModel()->getSoundIncoming());
-            }
-        }else{
-            if(clientModel->getOptionsModel()->getUseSent())
-                GUIUtil::PlaySound(clientModel->getOptionsModel()->getSoundSent());
-        }
+        //if (amount > 0)
+        //{
+        //    if(clientModel->getOptionsModel()->getUseIncoming()){
+        //        int loop=(int)(amount/1000000000)+1;
+        //        QString message="Incoming: " + QString::number(loop) + "\n";
+        //        QMessageBox::information(0,"Incoming",message,QMessageBox::Ok);
+        //        GUIUtil::PlaySound(clientModel->getOptionsModel()->getSoundIncoming());
+        //    }
+        //}else{
+        //        if(clientModel->getOptionsModel()->getUseSent())
+        //            GUIUtil::PlaySound(clientModel->getOptionsModel()->getSoundSent());
+        //}
 
 
         notificator->notify(Notificator::Information,
@@ -770,8 +772,8 @@ void BitcoinGUI::gotoOverviewPage()
 
 void BitcoinGUI::gotoMiningPage()
 {
-    if(clientModel->getOptionsModel()->getUseMining())
-        GUIUtil::PlaySound(clientModel->getOptionsModel()->getSoundMining());
+    //if(clientModel->getOptionsModel()->getUseMining())
+    //    GUIUtil::PlaySound(clientModel->getOptionsModel()->getSoundMining());
     miningAction->setChecked(true);
     centralWidget->setCurrentWidget(miningPage);
 
@@ -940,7 +942,7 @@ void BitcoinGUI::encryptWallet(bool status)
 
 void BitcoinGUI::backupWallet()
 {
-    QString saveDir = QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation);
+    QString saveDir = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
     QString filename = QFileDialog::getSaveFileName(this, tr("Backup Wallet"), saveDir, tr("Wallet Data (*.dat)"));
     if(!filename.isEmpty()) {
         if(!walletModel->backupWallet(filename)) {

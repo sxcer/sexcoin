@@ -40,8 +40,8 @@ namespace GUIUtil
     QString HtmlEscape(const std::string& str, bool fMultiLine=false);
 
     // Sound support for GUI versions
-    void PlaySound(QString soundfile);
-    void PlaySound(QString soundfile,int count);
+    // void PlaySound(QString soundfile);
+    // void PlaySound(QString soundfile,int count);
 
     /** Copy a field of the currently selected entry of a view to the clipboard. Does nothing if nothing
         is selected.

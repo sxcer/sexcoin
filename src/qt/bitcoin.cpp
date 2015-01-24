@@ -171,8 +171,8 @@ int main(int argc, char *argv[])
 #endif
 
     // Internal string conversion is all UTF-8
-    QTextCodec::setCodecForTr(QTextCodec::codecForName("UTF-8"));
-    QTextCodec::setCodecForCStrings(QTextCodec::codecForTr());
+    //QTextCodec::setCodecForTr(QTextCodec::codecForName("UTF-8"));
+    //QTextCodec::setCodecForCStrings(QTextCodec::codecForTr());
 
     Q_INIT_RESOURCE(bitcoin);
     QApplication app(argc, argv);
@@ -194,7 +194,7 @@ int main(int argc, char *argv[])
     // Application identification (must be set before OptionsModel is initialized,
     // as it is used to locate QSettings)
     app.setOrganizationName("sexcoin");
-    app.setOrganizationDomain("sex-coin.info");
+    app.setOrganizationDomain("sexcoin.info");
     if(GetBoolArg("-testnet")) // Separate UI settings for testnet
         app.setApplicationName("Sexcoin-Qt-testnet");
     else
@@ -260,8 +260,8 @@ int main(int argc, char *argv[])
     {
         if( settings.value("SoundStartup","none") ==  "none")
             initSettings();
-        if(settings.value("bUseStartup",true).toBool())
-            GUIUtil::PlaySound(settings.value("SoundStartup","startup.wav").toString());
+        //if(settings.value("bUseStartup",true).toBool())
+        //    GUIUtil::PlaySound(settings.value("SoundStartup","startup.wav").toString());
         splash.show();
         splash.setAutoFillBackground(true);
         splashref = &splash;

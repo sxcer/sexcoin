@@ -354,32 +354,32 @@ void OptionsDialog::on_toggle_all_clicked()
 
 void OptionsDialog::on_playStartup_clicked()
 {
-    GUIUtil::PlaySound(ui->startupSoundFile->currentText());
+    //GUIUtil::PlaySound(ui->startupSoundFile->currentText());
 }
 
 void OptionsDialog::on_playIncoming_clicked()
 {
-    GUIUtil::PlaySound(ui->incomingSoundFile->currentText());
+    //GUIUtil::PlaySound(ui->incomingSoundFile->currentText());
 }
 
 void OptionsDialog::on_playSent_clicked()
 {
-    GUIUtil::PlaySound(ui->sentSoundFile->currentText());
+    //GUIUtil::PlaySound(ui->sentSoundFile->currentText());
 }
 
 void OptionsDialog::on_playMining_clicked()
 {
-    GUIUtil::PlaySound(ui->miningSoundFile->currentText());
+    //GUIUtil::PlaySound(ui->miningSoundFile->currentText());
 }
 
 void OptionsDialog::on_playAbout_clicked()
 {
-   GUIUtil::PlaySound(ui->aboutSoundFile->currentText());
+    //GUIUtil::PlaySound(ui->aboutSoundFile->currentText());
 }
 
 void OptionsDialog::on_playSync_clicked()
 {
-    GUIUtil::PlaySound(ui->syncSoundFile->currentText());
+    //GUIUtil::PlaySound(ui->syncSoundFile->currentText());
 }
 
 void OptionsDialog::on_volumeSlider_sliderMoved(int position)
