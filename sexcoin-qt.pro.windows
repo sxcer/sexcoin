@@ -4,7 +4,9 @@ VERSION = 0.6.4.6
 INCLUDEPATH += src src/json src/qt
 DEFINES += QT_GUI BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE USE_IPV6
 CONFIG += no_include_pwd
-QT += phonon
+# phonon is gone in qt5, drop audio until it's ported to qt5
+#QT += phonon
+QT += widgets
 
 QMAKE_CFLAGS += -fpermissive
 QMAKE_CXXFLAGS += -fpermissive
